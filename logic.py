@@ -7,7 +7,8 @@ class Pokemon:
     def __init__(self, pokemon_trainer):
 
         self.pokemon_trainer = pokemon_trainer   
-
+        self.hp = 100
+        self.power = randint(10,20)
         self.pokemon_number = randint(1,1000)
         self.img = self.get_img()
         self.name = self.get_name()
@@ -56,7 +57,13 @@ class Pokemon:
             return (tmp)
         else:
             return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/121.png"
-
+    
+    def fight(self , enemy):
+        enemy.hp -= self.power
+        if enemy.hp <= 0 :
+            return f"Pokemon {enemy.name}  lose"
+        else:
+            return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
 
     # def korm_pokem(self):
 
@@ -64,3 +71,36 @@ class Pokemon:
     #     PokemLevel = 0
     #     if PokemXp >= 5 * PokemLevel:
     #         PokemLevel += 1
+
+
+class Fighter(Pokemon):
+    def info(self):
+        return f"Имя твоего покеомона: {self.name}, type your pokemon {self.type}, vas  pokemon boets" 
+    
+
+    def fight(self , enemy):
+        enemy.hp -= self.power * 2 
+        if enemy.hp <= 0 :
+            return f"Pokemon {enemy.name}  lose"
+        else:
+            return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
+        
+
+class Wizard(Pokemon):
+    def info(self):
+        return f"Имя твоего покеомона: {self.name}, type your pokemon {self.type}, vas pokemon mag" 
+    
+
+    def fight(self , enemy):
+        enemy.hp -= self.power 
+        sobitie = randint(1,3)
+        if enemy.hp <= 0 :
+            return f"Pokemon {enemy.name}  lose"
+        if sobitie == 2:
+            enemy.hp -= self.power * 0.5
+            return f"Ataka ulucena ,u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"
+        elif sobitie == 3:
+            self.hp -= randint(1,10)
+            return f"vi ne pravilno atakavali {self.hp} ,u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"
+        else:
+            return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  

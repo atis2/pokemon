@@ -1,14 +1,15 @@
 import telebot 
 from config import token
-
-from logic import Pokemon
+from random import randint
+from logic import Pokemon , Fighter , Wizard
 
 bot = telebot.TeleBot(token) 
 
 @bot.message_handler(commands=['go'])
 def go(message):
+    laki = randint(1,2)
     if message.from_user.username not in Pokemon.pokemons.keys():
-        pokemon = Pokemon(message.from_user.username)
+        pokemon = Fighter(message.from_user.username) if laki == 2 else Wizard(message.from_user.username)
         bot.send_message(message.chat.id, pokemon.info())
         bot.send_photo(message.chat.id, pokemon.show_img())
     else:
@@ -27,5 +28,16 @@ def info(message):
 def eat(message):
     bot.send_message(message.chat.id, "Ты pokormil pokemona")
         
+@bot.message_handler(commands=['fights'])
+def fights(message):
+    if message.reply_to_message:
+        pokemon = Pokemon.pokemons[message.from_user.username]
+        pokemonenemy = Pokemon.pokemons[message.reply_to_message.from_user.username]
+        bot.send_message(message.chat.id, pokemon.fight(pokemonenemy))
+
+
+
+
+
 bot.infinity_polling(none_stop=True)
 
