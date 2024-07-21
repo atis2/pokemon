@@ -23,6 +23,9 @@ def info(message):
         bot.send_message(message.chat.id, pokemon.info())
         bot.send_photo(message.chat.id, pokemon.show_img())
 
+@bot.message_handler(commands=['eat'])
+def eat(message):
+    bot.send_message(message.chat.id, "Ты pokormil pokemona")
         
 bot.infinity_polling(none_stop=True)
 

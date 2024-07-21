@@ -56,3 +56,11 @@ class Pokemon:
             return (tmp)
         else:
             return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/121.png"
+
+
+    # def korm_pokem(self):
+
+    #     PokemXp = 0
+    #     PokemLevel = 0
+    #     if PokemXp >= 5 * PokemLevel:
+    #         PokemLevel += 1
