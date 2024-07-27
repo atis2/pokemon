@@ -26,8 +26,12 @@ def info(message):
 
 @bot.message_handler(commands=['eat'])
 def eat(message):
-    bot.send_message(message.chat.id, "Ты pokormil pokemona")
-        
+    pokemon = Pokemon.pokemons[message.from_user.username]
+    bot.send_message(message.chat.id, pokemon.korm_pokem) 
+
+
+
+
 @bot.message_handler(commands=['fights'])
 def fights(message):
     if message.reply_to_message:

@@ -13,6 +13,8 @@ class Pokemon:
         self.img = self.get_img()
         self.name = self.get_name()
         self.type = self.get_type()
+        self.lve = 0
+        self.food = randint(1,5)
         Pokemon.pokemons[pokemon_trainer] = self
 
     # Метод для получения картинки покемона через API
@@ -38,7 +40,7 @@ class Pokemon:
 
     # Метод класса для получения информации
     def info(self):
-        return f"Имя твоего покеомона: {self.name}, type your pokemon {self.type}" 
+        return f"Имя твоего покеомона: {self.name} hp {self.hp} , ego level {self.lve}, type your pokemon {self.type}" 
 
     # Метод класса для получения картинки покемона
     def show_img(self):
@@ -65,17 +67,15 @@ class Pokemon:
         else:
             return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
 
-    # def korm_pokem(self):
-
-    #     PokemXp = 0
-    #     PokemLevel = 0
-    #     if PokemXp >= 5 * PokemLevel:
-    #         PokemLevel += 1
+    def korm_pokem(self):
+            self.lve + self.food 
+            self.hp + self.food * 5
+            return f"Имя твоего покеомона: {self.name} hp {self.hp}, ti ego pokormil na {self.food} i level {self.lve}"
 
 
 class Fighter(Pokemon):
     def info(self):
-        return f"Имя твоего покеомона: {self.name}, type your pokemon {self.type}, vas  pokemon boets" 
+        return f"Имя твоего покеомона: {self.name} hp {self.hp}, ego level {self.lve}, type your pokemon {self.type}, vas  pokemon boets" 
     
 
     def fight(self , enemy):
@@ -84,11 +84,12 @@ class Fighter(Pokemon):
             return f"Pokemon {enemy.name}  lose"
         else:
             return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
-        
+    
+    
 
 class Wizard(Pokemon):
     def info(self):
-        return f"Имя твоего покеомона: {self.name}, type your pokemon {self.type}, vas pokemon mag" 
+        return f"Имя твоего покеомона: {self.name} hp {self.hp} , ego level {self.lve}, type your pokemon {self.type}, vas pokemon mag" 
     
 
     def fight(self , enemy):
@@ -103,4 +104,8 @@ class Wizard(Pokemon):
             self.hp -= randint(1,10)
             return f"vi ne pravilno atakavali {self.hp} ,u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"
         else:
-            return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
+            return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"
+
+
+    
+
