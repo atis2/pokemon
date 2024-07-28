@@ -1,6 +1,6 @@
 from random import randint
 import requests
-
+import datetime
 class Pokemon:
     pokemons = {}
     # Инициализация объекта (конструктор)
@@ -15,6 +15,7 @@ class Pokemon:
         self.type = self.get_type()
         self.lve = 0
         self.food = 5
+        self.last_feed_time = datetime.datetime.now()
         Pokemon.pokemons[pokemon_trainer] = self
 
     # Метод для получения картинки покемона через API
@@ -73,11 +74,27 @@ class Pokemon:
                 self.hp += self.food * 5
             return f"Имя твоего покеомона: {self.name} hp {self.hp}, ti ego pokormil na {self.food} i level {self.lve}"
 
+    def feed(self, feed_interval = 20, hp_increase = 10 ):
+        current_time = datetime.datetime.now()  
+        delta_time = datetime.timedelta(seconds=feed_interval)  
+        if (current_time - self.last_feed_time) > delta_time:
+            self.hp += hp_increase
+            self.last_feed_time = current_time
+            return f"Здоровье покемона увеличено. Текущее здоровье: {self.hp}"
+        else:
+            return f"Следующее время кормления покемона: {self.last_feed_time+delta_time}"  
+        
+
+
 
 class Fighter(Pokemon):
     def info(self):
         return f"Имя твоего покеомона: {self.name} hp {self.hp}, ego level {self.lve}, type your pokemon {self.type}, vas  pokemon boets" 
     
+    def feed(self):
+        return super().feed(20, 5)
+
+
 
     def fight(self , enemy):
         enemy.hp -= self.power * 2 
@@ -92,6 +109,9 @@ class Wizard(Pokemon):
     def info(self):
         return f"Имя твоего покеомона: {self.name} hp {self.hp} , ego level {self.lve}, type your pokemon {self.type}, vas pokemon mag" 
     
+    def feed(self):
+        return super().feed(60,30)
+        
 
     def fight(self , enemy):
         enemy.hp -= self.power 
