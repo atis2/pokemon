@@ -27,7 +27,7 @@ def info(message):
 @bot.message_handler(commands=['eat'])
 def eat(message):
     pokemon = Pokemon.pokemons[message.from_user.username]
-    bot.send_message(message.chat.id, pokemon.korm_pokem) 
+    bot.send_message(message.chat.id, pokemon.korm_pokem()) 
 
 
 

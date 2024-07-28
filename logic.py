@@ -14,7 +14,7 @@ class Pokemon:
         self.name = self.get_name()
         self.type = self.get_type()
         self.lve = 0
-        self.food = randint(1,5)
+        self.food = 5
         Pokemon.pokemons[pokemon_trainer] = self
 
     # Метод для получения картинки покемона через API
@@ -68,8 +68,9 @@ class Pokemon:
             return f"Mi atakovli i u vroga ostalos {enemy.hp} hp , sila ataki {self.power}"  
 
     def korm_pokem(self):
-            self.lve + self.food 
-            self.hp + self.food * 5
+            self.lve += self.food / 5
+            if self.hp < 100:
+                self.hp += self.food * 5
             return f"Имя твоего покеомона: {self.name} hp {self.hp}, ti ego pokormil na {self.food} i level {self.lve}"
 
 
